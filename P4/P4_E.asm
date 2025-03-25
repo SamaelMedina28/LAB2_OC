@@ -1,19 +1,16 @@
 
 %include "../LIB/pc_io.inc"  	; incluir declaraciones de procedimiento externos
 								; que se encuentran en la biblioteca libpc_io.a
-
 section	.text
 	global _start       ;referencia para inicio de programa
-	
 _start: ;Direccionamiento relativo a base mas indice
-
 	mov edx, msg		; edx = dirección de la cadena msg
 	call puts			; imprime cadena msg terminada en valor nulo (0)
 
     mov ebx, msg  
 	mov esi, 20
     mov byte [ebx + esi+5], 'Z'  
-
+	
 	mov edx, msg		; edx = dirección de la cadena msg
 	call puts			; imprime cadena msg terminada en valor nulo (0)
 
