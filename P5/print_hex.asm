@@ -33,10 +33,24 @@ _start:                     ;tell linker entry point
 	call putchar
 
 ; INCISO C
-	mul bl, 8
-	mov N,bl
-	mov ax,N
+	mov cl, 8
+	mov al,bl
+	mul cl
+	mov [N], ax
 	call pHex_w
+	mov al,10	; cambio de linea
+	call putchar
+	mov al,10	; cambio de linea
+	call putchar
+
+; INCISO D
+
+	ADD word [N], 1
+	mov  ax,[N]
+	call pHex_w
+	
+; INCISO E
+
 	
 
 
@@ -47,4 +61,4 @@ _start:                     ;tell linker entry point
 	int 0x80        ;call kernel
 
 section	.data
-N dw 0x000 ,0xa,0 
+N dw 0x0000 
