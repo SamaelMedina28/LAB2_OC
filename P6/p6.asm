@@ -68,12 +68,16 @@ mov al,10
 	mov al,10	
 	call putchar; cambio de linea
 	mov esi, 0x20D685F3
+	xor esi, 0x84042002;1000 0100 0000 0100 0010 0000 0000 0010
 	mov eax, esi
-	xor eax, 0x84042002;1000 0100 0000 0100 0010 0000 0000 0010
 	call pBin_dw ; Imprime el valor modificado en binario
-
-
-
+mov al,10	
+	call putchar; cambio de linea
+	call putchar; cambio de linea
+; INCISO D
+	push esi
+	pop eax
+	call pBin_dw ; Imprime el valor modificado en binario
 
 
 
