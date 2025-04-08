@@ -9,6 +9,7 @@ _start:                     ;tell linker entry point
 	; LLamando a funciones externas
 	extern pBin_dw 
 	extern pBin_w 
+	extern pBin_b
 
 ;INCISO A
 	mov eax, 0x22446688
@@ -56,7 +57,7 @@ _start:                     ;tell linker entry point
 	sal cx, 3
 	mov ax, cx
 	call pHex_w ; Imprime el valor modificado en hexadecimal
-mov al,10	
+	mov al,10	
 	call putchar; cambio de linea
 	call putchar; cambio de linea
 
@@ -71,13 +72,63 @@ mov al,10
 	xor esi, 0x84042002;1000 0100 0000 0100 0010 0000 0000 0010
 	mov eax, esi
 	call pBin_dw ; Imprime el valor modificado en binario
-mov al,10	
+	mov al,10	
 	call putchar; cambio de linea
 	call putchar; cambio de linea
 ; INCISO D
 	push esi
 	pop eax
 	call pBin_dw ; Imprime el valor modificado en binario
+	mov al,10	
+	call putchar; cambio de linea
+	call putchar; cambio de linea
+; INCISO E
+	mov ch, 0xA7
+	mov al, ch
+	call pBin_b
+	mov al,10
+	call putchar ; cambio de linea
+	mov ch, 0xA7
+	or ch,0x12 ;0001-0010 
+	mov al, ch
+	call pBin_b ; Imprime el valor modificado en binario
+	mov al,10
+	call putchar ; cambio de lineamov al,10
+	call putchar ; cambio de linea
+; INCISO F
+	mov bp, 0x67DA
+	mov ax, bp
+	call pBin_w ; Imprime el valor original en binario 
+	mov al,10
+	call putchar ; cambio de linea
+	xor bp,0x4202 ; 0100-0010-0000-0010
+	mov ax, bp
+	call pBin_w ; Imprime el valor modificado en binario
+	mov al, 10
+	call putchar ; cambio de linea
+	call putchar ; cambio de linea
+; INCISO G
+	mov ax, bp
+	call pBin_w ; Imprime el valor modificado en binario
+	sar bp, 3
+	mov al, 10
+	call putchar ; cambio de linea
+	mov ax, bp
+	call pBin_w ; Imprime el valor modificado en binario
+	mov al, 10
+	call putchar ; cambio de linea
+	call putchar ; cambio de linea
+; INCISO H
+	mov ebx, 0xABCDEF12
+	mov eax, ebx
+	call pBin_dw ; Imprime el valor original en binario
+	mov al,10
+	call putchar ; cambio de linea
+	shr ebx, 5
+	mov eax, ebx
+	call pBin_dw ; Imprime el valor modificado en binario
+
+
 
 
 
@@ -89,3 +140,4 @@ mov al,10
 
 section	.data
 N dw 0x000 ,0xa,0 
+
