@@ -78,6 +78,7 @@ _start:                     ;tell linker entry point
 ; INCISO D
 	push esi
 	pop eax
+	push esi ; Volemos a poenr el valor en la pila ya que para mostrarlo lo tuvimos que sacar y poenr en aex
 	call pBin_dw ; Imprime el valor modificado en binario
 	mov al,10	
 	call putchar; cambio de linea
@@ -136,9 +137,21 @@ _start:                     ;tell linker entry point
 	call pBin_w
 	mov al, 10
 	call putchar
-	rol cx, 3
+	shl cx, 3
 	mov ax, cx
 	call pBin_w
+	mov al, 10
+	call putchar
+	call putchar ; cambio de linea
+; INCISO J
+	pop esi
+	mov eax, esi
+	call pBin_dw
+	mov al, 10
+	call putchar
+	call putchar ; cambio de linea
+; INCISO K
+
 
 
 
