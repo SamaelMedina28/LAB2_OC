@@ -151,6 +151,16 @@ _start:                     ;tell linker entry point
 	call putchar
 	call putchar ; cambio de linea
 ; INCISO K
+	mov eax, esi
+	call pBin_dw
+	mov al, 10
+	call putchar
+	mov eax, esi
+	shl eax, 3 ; Primero lo multiplicamos por 8
+	shl esi, 1 ; Luego lo multiplciamos por 2
+	add eax, esi ; Ahora sumamos los dos resultados para que nos de el resultado por 10
+	call pBin_dw
+
 
 
 
