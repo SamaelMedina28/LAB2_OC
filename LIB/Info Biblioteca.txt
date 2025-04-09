@@ -2,7 +2,7 @@ Pasos para ensamblar con NASM:
 
 Comando para ensamblar: nasm -f elf <archivo.asm>
 Comando para enlazar: ld -m elf_i386 <archivos.o> -o <output_file>
-; enlazar junto con las librerias correspondientes
+; enlazar junto con las librerias correspondientes .a
 
 ; agregar las librerias en nuestro .asm
 %include "../LIB/pc_iox.inc"

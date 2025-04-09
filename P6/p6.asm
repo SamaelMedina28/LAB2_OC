@@ -127,6 +127,20 @@ _start:                     ;tell linker entry point
 	shr ebx, 5
 	mov eax, ebx
 	call pBin_dw ; Imprime el valor modificado en binario
+	mov al, 10
+	call putchar
+	call putchar ; cambio de linea
+
+; INCISO I
+	mov ax, cx
+	call pBin_w
+	mov al, 10
+	call putchar
+	rol cx, 3
+	mov ax, cx
+	call pBin_w
+
+
 
 
 
