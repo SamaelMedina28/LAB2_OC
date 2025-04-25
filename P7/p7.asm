@@ -14,7 +14,7 @@ _start: ; Direccionamiento directo
     ja .inicio ; Si el valor de al es mayor que 9, salta a la etiqueta .inicio
 
     cmp al, '5'
-    jnb .incisoB ; Si el valor de al no es menor que 0, salta a la etiqueta .fin
+    jnb .incisoB ; Si el valor de al no es menor que 0, salta a la etiqueta .incisoB
 
     mov al, 10
     call putchar ; cambio de linea
@@ -22,8 +22,6 @@ _start: ; Direccionamiento directo
 	mov edx, msg		; edx = dirección de la cadena msg
 	call puts			; imprime cadena msg terminada en valor nulo (0)
     
-    mov al, 10
-    call putchar ; cambio de linea
 ; INCISO B
 .incisoB:
     mov al, 10
@@ -35,7 +33,7 @@ _start: ; Direccionamiento directo
     ja .letra ; Si el valor de al es mayor que 9, salta a la etiqueta .fin
     mov edx, msN ; Se imprime el mensaje de que es un número
     call puts			
-    jmp .fin ; Salta a la etiqueta .fin
+    jmp .incisoC ; Salta a la etiqueta .incisoC
 .letra:  
     cmp al, 'A'
     jb .fin ; Si el valor de al es menor que A, salta a la etiqueta .fin
@@ -57,8 +55,8 @@ _start: ; Direccionamiento directo
 .incisoC:
     mov cx, 0x05 
 .inicioC:
-    mov edx, puntito		; edx = dirección de la cadena msg
-    call puts			; imprime cadena msg terminada en valor nulo (0)
+    mov al, '*'		; edx = dirección de la cadena msg
+    call putchar			; imprime cadena msg terminada en valor nulo (0)
     loop .inicioC ; decrementa cx y salta a la etiqueta .inicioC si cx no es cero
     
 
@@ -73,4 +71,3 @@ section	.data
 msg	db  'Es menor',0xa,0 
 msN	db  ' <- Es numero',0xa,0 
 msL	db  ' <- Es letra',0xa,0 
-puntito db '*',0xa,0
