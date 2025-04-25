@@ -1,5 +1,5 @@
 
-%include "../LIB/pc_io.inc"  	; incluir declaraciones de procedimiento externos
+%include "../LIB/pc_iox.inc"  	; incluir declaraciones de procedimiento externos
 								; que se encuentran en la biblioteca libpc_io.a
 section	.text
 	global _start       ;referencia para inicio de programa
@@ -54,11 +54,35 @@ _start: ; Direccionamiento directo
 ; INCISO C
 .incisoC:
     mov cx, 0x05 
-.inicioC:
+.bucle:
     mov al, '*'		; edx = dirección de la cadena msg
     call putchar			; imprime cadena msg terminada en valor nulo (0)
-    loop .inicioC ; decrementa cx y salta a la etiqueta .inicioC si cx no es cero
-    
+    loop .bucle ; decrementa cx y salta a la etiqueta .inicioC si cx no es cero
+;INCISO D
+    mov ecx, 0  
+    mov al, 10
+    call putchar ; cambio de linea
+.captura:
+    call getche          ; Leer un carácter del teclado
+    mov [buffer + ecx], al ; Almacenar el carácter en el arreglo usando el índice
+    inc ecx              ; Incrementar el índice
+    cmp ecx, 10          ; Verificar si ya se capturaron 10 caracteres
+    jb .captura          ; Si no, repetir el bucle
+
+    ; Mostrar mensaje de confirmación
+    mov edx, msC  ; Cargar la dirección del mensaje
+    call puts            ; Imprimir el mensaje
+
+    ; Imprimir los caracteres almacenados en el arreglo
+    mov ecx, 0           ; Reiniciar índice en 0
+.imprimir:
+    mov al, [buffer + ecx] ; Cargar el carácter desde el arreglo usando el índice
+    call putchar         ; Imprimir el carácter
+    mov al, 10           ; Código ASCII para nueva línea
+    call putchar         ; Imprimir nueva línea
+    inc ecx              ; Incrementar el índice
+    cmp ecx, 10          ; Verificar si ya se imprimieron 10 caracteres
+    jb .imprimir  
 
 
 .fin:
@@ -71,3 +95,6 @@ section	.data
 msg	db  'Es menor',0xa,0 
 msN	db  ' <- Es numero',0xa,0 
 msL	db  ' <- Es letra',0xa,0 
+msC db 'Caracteres capturados',0xa,0
+section .bss
+buffer resb 10
