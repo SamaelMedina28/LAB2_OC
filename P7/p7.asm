@@ -43,7 +43,7 @@ _start: ; Direccionamiento directo
     ja .fin ; Si el valor de al es mayor que Z, salta a la etiqueta .fin
     mov edx, msL ; Se imprime el mensaje de que es un número
     call puts			
-    jmp .fin ; Salta a la etiqueta .fin
+    jmp .incisoC ; Salta a la etiqueta .incisoC
 
     mov al, 10
     call putchar ; cambio de linea
@@ -53,7 +53,15 @@ _start: ; Direccionamiento directo
     
     mov al, 10
     call putchar ; cambio de linea
+; INCISO C
+.incisoC:
+    mov cx, 0x05 
+.inicioC:
+    mov edx, puntito		; edx = dirección de la cadena msg
+    call puts			; imprime cadena msg terminada en valor nulo (0)
+    loop .inicioC ; decrementa cx y salta a la etiqueta .inicioC si cx no es cero
     
+
 
 .fin:
     mov al, 10
@@ -65,3 +73,4 @@ section	.data
 msg	db  'Es menor',0xa,0 
 msN	db  ' <- Es numero',0xa,0 
 msL	db  ' <- Es letra',0xa,0 
+puntito db '*',0xa,0
