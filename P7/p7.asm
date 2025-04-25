@@ -6,20 +6,54 @@ section	.text
 	
 _start: ; Direccionamiento directo
 .inicio:
+; INCISO A
     call getche	; espera a que el usuario presione una tecla
-    cmp al, 0x30
-    jb .inicio ; Si el valor de al es menor que 0x32, salta a la etiqueta .inicio
-    cmp al, 0x39
-    ja .inicio ; Si el valor de al es mayor que 0x39, salta a la etiqueta .fin
+    cmp al, '0'
+    jb .inicio ; Si el valor de al es menor que 0, salta a la etiqueta .inicio
+    cmp al, '9'
+    ja .inicio ; Si el valor de al es mayor que 9, salta a la etiqueta .inicio
 
-    cmp al, 0x35
-    jnb .fin ; Si el valor de al es menor que 0x35, salta a la etiqueta .menor
+    cmp al, '5'
+    jnb .incisoB ; Si el valor de al no es menor que 0, salta a la etiqueta .fin
 
     mov al, 10
     call putchar ; cambio de linea
 
 	mov edx, msg		; edx = dirección de la cadena msg
 	call puts			; imprime cadena msg terminada en valor nulo (0)
+    
+    mov al, 10
+    call putchar ; cambio de linea
+; INCISO B
+.incisoB:
+    mov al, 10
+    call putchar ; cambio de linea
+    call getche	; espera a que el usuario presione una tecla
+    cmp al, '0'
+    jb .letra ; Si el valor de al es menor que 0, salta a la etiqueta .inicio
+    cmp al, '9'
+    ja .letra ; Si el valor de al es mayor que 9, salta a la etiqueta .fin
+    mov edx, msN ; Se imprime el mensaje de que es un número
+    call puts			
+    jmp .fin ; Salta a la etiqueta .fin
+.letra:  
+    cmp al, 'A'
+    jb .fin ; Si el valor de al es menor que A, salta a la etiqueta .fin
+    cmp al, 'Z'
+    ja .fin ; Si el valor de al es mayor que Z, salta a la etiqueta .fin
+    mov edx, msL ; Se imprime el mensaje de que es un número
+    call puts			
+    jmp .fin ; Salta a la etiqueta .fin
+
+    mov al, 10
+    call putchar ; cambio de linea
+
+	mov edx, msg		; edx = dirección de la cadena msg
+	call puts			; imprime cadena msg terminada en valor nulo (0)
+    
+    mov al, 10
+    call putchar ; cambio de linea
+    
 
 .fin:
     mov al, 10
@@ -29,3 +63,5 @@ _start: ; Direccionamiento directo
 
 section	.data
 msg	db  'Es menor',0xa,0 
+msN	db  ' <- Es numero',0xa,0 
+msL	db  ' <- Es letra',0xa,0 
