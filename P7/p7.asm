@@ -69,11 +69,9 @@ _start: ; Direccionamiento directo
     jb .captura          ; si no, repite el bucle
     mov al, 10
     call putchar         ; imprime salto de linea
-
     ; Mensaje de confirmacion
     mov edx, msC  ; carga la direccion del mensaje
     call puts            ; imprime el mensaje
-
     ; Imprime los caracteres guardados en el arreglo
     mov ecx, 0           ; reinicia el indice en 0
 .imprimir:
@@ -84,8 +82,6 @@ _start: ; Direccionamiento directo
     inc ecx              ; incrementa el indice
     cmp ecx, 10          ; checa si ya se imprimieron 10 caracteres
     jb .imprimir  
-
-
 .fin:
     mov al, 10
     call putchar ; salto de linea
