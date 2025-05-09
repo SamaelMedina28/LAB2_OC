@@ -50,6 +50,8 @@ _start: ; Direccionamiento directo
     
     mov al, 10
     call putchar ; salto de linea
+    ;biblibioteca de c: apt-get install libc6-dev-i386
+    ;sudo
 ; INCISO C
 .incisoC:
     mov cx, 0x05 
