@@ -23,9 +23,9 @@ int main() {
     printf("La suma de %d y %d es: %d\n", num1, num2, resultado);
     printf("La longitud de la cadena '%s' es: %d\n", cadena, strlen(cadena));
     printf("La letra %c esta en la posicion %d de la cadena %s\n", letra, posicion, cadena);   
-    printf("El bit %d de %d es: %d\n", 2, num3, getBit(num3, 0));
-    printf("El bit %d de %d es: %d\n", 2, num3, getBit(num3, 1));
-    printf("El bit %d de %d es: %d\n", 2, num3, getBit(num3, 2));
     printf("El bit %d de %d es: %d\n", 2, num3, getBit(num3, 3));
+    printf("El bit %d de %d es: %d\n", 2, num3, getBit(num3, 2));
+    printf("El bit %d de %d es: %d\n", 2, num3, getBit(num3, 1));
+    printf("El bit %d de %d es: %d\n", 2, num3, getBit(num3, 0));
     return 0;
 }
