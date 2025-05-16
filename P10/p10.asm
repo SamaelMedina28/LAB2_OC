@@ -26,5 +26,7 @@ pbin8b:
 
     pop ebx
     pop ebp ; Protocolo de salida
-    ret ; Devolver al llamador
 
+    mov al, 10
+    call putchar ; Imprimir un salto de línea
+    ret ; Devolver al llamador
