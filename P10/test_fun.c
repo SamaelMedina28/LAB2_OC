@@ -5,9 +5,15 @@ int num1 = 10;
 // apt-get install gcc-multilib
 // apt-get install libc6-dev-i386 -y
 extern void pbin8b( int num);
+extern void pbin16b( int num);
 
 int main() {
     int num = 5;
+    int num2 = 256;
     pbin8b(num);
+    pbin16b(num2);
+    
+
     return 0;
+
 }

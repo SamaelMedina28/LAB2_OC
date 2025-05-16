@@ -2,6 +2,8 @@
 
 section .text
     global pbin8b
+    global pbin16b
+
     
 pbin8b:
     push ebp
@@ -30,3 +32,23 @@ pbin8b:
     mov al, 10
     call putchar ; Imprimir un salto de línea
     ret ; Devolver al llamador
+pbin16b:
+    push ebp
+    mov ebp, esp ; Protocolo de entrada
+    push ebx
+
+    mov dx, [ebp+8] ; Cargar el valor de 16 bits en DX
+
+    mov al, dh      ; Obtener el byte alto
+    push eax        ; Pasar como argumento
+    call pbin8b     ; Imprimir byte alto
+    add esp, 4      ; Limpiar la pila
+
+    mov al, dl      ; Obtener el byte bajo
+    push eax        ; Pasar como argumento
+    call pbin8b     ; Imprimir byte bajo
+    add esp, 4      ; Limpiar la pila
+
+    pop ebx
+    pop ebp         ; Protocolo de salida
+    ret             ; Devolver al llamador
