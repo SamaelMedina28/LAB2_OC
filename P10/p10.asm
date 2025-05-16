@@ -3,7 +3,7 @@
 section .text
     global pbin8b
     global pbin16b
-
+    global pbin32b
     
 pbin8b:
     push ebp
@@ -36,6 +36,9 @@ pbin16b:
     push ebp
     mov ebp, esp ; Protocolo de entrada
     push ebx
+    push edx
+    push eax
+    push ecx
 
     mov dx, [ebp+8] ; Cargar el valor de 16 bits en DX
 
@@ -48,6 +51,39 @@ pbin16b:
     push eax        ; Pasar como argumento
     call pbin8b     ; Imprimir byte bajo
     add esp, 4      ; Limpiar la pila
+    pop ecx
+    pop eax
+    pop edx
+
+    pop ebx
+    pop ebp         ; Protocolo de salida
+    ret             ; Devolver al llamador
+pbin32b:
+    push ebp
+    mov ebp, esp ; Protocolo de entrada
+    push ebx
+    push edx
+    push eax
+    push ecx
+
+    mov edx, [ebp+8] ; Cargar el valor de 32 bits en EAX
+    mov eax, edx      ; Copiar el valor a EAX`
+
+    mov ax, dx      ; Obtener el byte bajo
+    shl eax, 16     ; Desplazar a la izquierda para obtener el byte alto
+    push eax        ; Pasar como argumento
+    call pbin16b     ; Imprimir byte bajo
+    add esp, 4      ; Limpiar la pila
+
+    shr eax, 16     ; Desplazar a la derecha para obtener el byte alto
+    mov dx, ax      ; Obtener el byte alto
+    push eax        ; Pasar como argumento
+    call pbin16b     ; Imprimir byte alto
+    add esp, 4      ; Limpiar la pila
+
+    pop ecx
+    pop eax
+    pop edx
 
     pop ebx
     pop ebp         ; Protocolo de salida
