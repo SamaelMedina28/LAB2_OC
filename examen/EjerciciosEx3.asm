@@ -3,6 +3,7 @@
 section .text
     global NotBit32b
     global str_cnt_chr
+    global shr_s
 
 NotBit32b:
     push ebp
@@ -45,5 +46,15 @@ str_cnt_chr:
     mov eax, ebx
 
     pop ebx
+    pop ebp
+    ret
+
+shr_s:
+    push ebp
+    mov ebp, esp
+
+    mov eax, [ebp+8]
+    sar eax,1
+
     pop ebp
     ret
