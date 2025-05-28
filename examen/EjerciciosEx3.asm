@@ -4,12 +4,11 @@ section .text
     global NotBit32b
     global str_cnt_chr
     global shr_s
+    global isPrime
 
 NotBit32b:
     push ebp
     mov ebp, esp 
-    push ebx
-    push edx
     ; _______ 
     mov eax, [ebp+8]   ; El valor original de 32 bits
     mov cl, [ebp+12]   ; La posicion del bit a negar
@@ -17,8 +16,6 @@ NotBit32b:
     shl edx, cl
     xor eax, edx
     ; _______
-    pop edx
-    pop ebx
     pop ebp
     ret  ;retorna el valor de eax
 
@@ -56,5 +53,36 @@ shr_s:
     mov eax, [ebp+8]
     sar eax,1
 
+    pop ebp
+    ret
+isPrime:
+    push ebp
+    mov ebp, esp
+    push ebx
+
+    mov eax, [ebp+8]
+
+    cmp eax, 3 ;si es igual o menor a 3 es primo
+    jna .primo
+
+    mov ecx, 2
+    mov ebx, eax
+.loop:   
+    xor edx, edx
+    mov eax, ebx
+    div ecx
+    cmp edx, 0
+    jz .noPrimo
+    inc ecx
+    cmp ecx, ebx
+    jae .primo
+    jmp .loop
+.primo:
+    mov eax, 1
+    jmp .fin
+.noPrimo:
+    mov eax, 0
+.fin:
+    pop ebx
     pop ebp
     ret
