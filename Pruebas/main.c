@@ -7,6 +7,9 @@ extern uint8_t getNibble(uint32_t, int);
 extern int mayor( int*, int);
 extern int esPrimo(int);
 
+extern int sumar(int, int);
+extern int sumar1(int, int, int);
+
 int main(){
     // Incrementar numero de 32 bits
     printf("Se incremento el numero 5 y ahora es: %d\n", inc(5));
@@ -35,5 +38,9 @@ int main(){
         printf("El numero %d no es primo\n", numero);
     }
 
+    // Incrementar y sumar 5
+    int res = sumar1(1,4,10);
+
+    printf("El resultado de sumar1(1, 4, 10) es: %d\n", res);
     return 0;
 }

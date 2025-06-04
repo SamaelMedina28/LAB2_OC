@@ -6,6 +6,8 @@ section .text
     global getNibble
     global mayor
     global esPrimo
+    global sumar
+    global sumar1
 inc:
     push ebp
     mov ebp, esp
@@ -96,6 +98,47 @@ esPrimo:
 .noPrimo:
     mov eax, 0 ; no es primo
 .fin:
+    pop ebx
+    pop ebp
+    ret
+
+
+sumar1:
+    push ebp
+    mov ebp, esp
+    push ebx
+    push ecx
+    push edx
+
+    mov eax, [ebp+8] ; primer numero
+    mov ecx, [ebp+12] ; segundo numero
+    mov edx, [ebp+16] ; tercer numero (opcional)
+
+    add ecx, edx ; sumar los dos numeros
+    push ecx ; guardar el resultado en la pila
+    push eax ; guardar el primer numero en la pila
+    call sumar ; llamar a la funcion sumar
+    add esp, 8 ; limpiar la pila
+
+    pop edx
+    pop ecx
+    pop ebx
+    pop ebp
+    ret
+sumar:
+    push ebp
+    mov ebp, esp
+    push ebx
+    push ecx
+    push edx
+
+    mov eax, [ebp+8] ; primer numero
+    mov ecx, [ebp+12] ; segundo numero
+
+    add eax, ecx ; sumar los dos numeros
+
+    pop edx
+    pop ecx
     pop ebx
     pop ebp
     ret
