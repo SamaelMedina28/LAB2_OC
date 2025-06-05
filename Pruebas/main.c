@@ -10,6 +10,8 @@ extern int esPrimo(int);
 extern int sumar(int, int);
 extern int sumar1(int, int, int);
 
+extern int primoGemelo(int);
+
 int main(){
     // Incrementar numero de 32 bits
     printf("Se incremento el numero 5 y ahora es: %d\n", inc(5));
@@ -42,5 +44,14 @@ int main(){
     int res = sumar1(1,4,10);
 
     printf("El resultado de sumar1(1, 4, 10) es: %d\n", res);
+
+    // Primos gemelos
+    int primo = 17;
+    if (primoGemelo(primo)) {
+        printf("El numero %d y %d son primos gemelos\n", primo, primo + 2);
+    } else {
+        printf("No hay primo gemelo para: %d\n", primo);
+    }
+
     return 0;
 }

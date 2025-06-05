@@ -8,6 +8,7 @@ section .text
     global esPrimo
     global sumar
     global sumar1
+    global primoGemelo
 inc:
     push ebp
     mov ebp, esp
@@ -140,5 +141,29 @@ sumar:
     pop edx
     pop ecx
     pop ebx
+    pop ebp
+    ret
+
+primoGemelo:
+    push ebp
+    mov ebp, esp
+    mov eax, [ebp+8] ; primer numero
+    push eax
+    call esPrimo ; comprobar si es primo
+    add esp, 4 ; limpiar la pila
+    cmp eax, 0 ; si no es primo, salir
+    je .noPrimo
+    mov eax, [ebp+8] ; recargar el primer numero
+    add eax, 2 ; sumar 2 para buscar el siguiente primo
+    push eax
+    call esPrimo ; comprobar si el siguiente numero es primo
+    add esp, 4 ; limpiar la pila
+    cmp eax, 0 ; si no es primo, salir
+    je .noPrimo
+    mov eax, 1 ; son primos gemelos
+    jmp .fin
+.noPrimo:
+    mov eax, 0 ; no son primos gemelos
+.fin:
     pop ebp
     ret
